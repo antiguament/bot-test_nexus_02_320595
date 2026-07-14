@@ -160,6 +160,64 @@
         :root .sidebar-contact-item .sidebar-avatar {
             background: linear-gradient(135deg, #0099cc, #10b981);
         }
+        [data-theme="light"] .sidebar-contact-item .sidebar-name {
+            color: #1e293b;
+        }
+        [data-theme="light"] .sidebar-contact-item .sidebar-number {
+            color: #64748b;
+        }
+        [data-theme="light"] .sidebar-contact-item .sidebar-last-msg {
+            color: #94a3b8;
+        }
+        [data-theme="light"] .sidebar-contact-item .sidebar-notes {
+            color: #d97706;
+        }
+        [data-theme="light"] .contact-card {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(0,0,0,0.12);
+        }
+        [data-theme="light"] .contact-card:hover {
+            background: rgba(255,255,255,0.9);
+            border-color: rgba(167,139,250,0.3);
+            box-shadow: 0 4px 16px rgba(167,139,250,0.1);
+        }
+        [data-theme="light"] .contact-card.active {
+            background: linear-gradient(135deg, rgba(167,139,250,0.12) 0%, rgba(244,114,182,0.08) 100%);
+            border-color: var(--accent-purple);
+            border-left: 3px solid var(--accent-purple);
+            box-shadow: 0 4px 24px rgba(167,139,250,0.12);
+        }
+        [data-theme="light"] .contact-card .avatar-mini {
+            background: linear-gradient(135deg, #a78bfa, #f472b6);
+        }
+        [data-theme="light"] .sidebar-contact-item:hover {
+            background: linear-gradient(135deg, rgba(167,139,250,0.08) 0%, rgba(244,114,182,0.04) 100%);
+            border-color: rgba(167,139,250,0.18);
+        }
+        [data-theme="light"] .sidebar-contact-item.active {
+            background: linear-gradient(135deg, rgba(167,139,250,0.15) 0%, rgba(244,114,182,0.1) 100%);
+            border-color: var(--accent-purple);
+            border-left: 3px solid var(--accent-purple);
+            box-shadow: 0 4px 20px rgba(167,139,250,0.1);
+        }
+        [data-theme="light"] .sidebar-contact-item .sidebar-avatar {
+            background: linear-gradient(135deg, #a78bfa, #f472b6);
+        }
+        [data-theme="light"] .sidebar-contact-item.saved .sidebar-avatar {
+            background: linear-gradient(135deg, #9333ea, #c026d3);
+        }
+        [data-theme="light"] .sidebar-contact-item .sidebar-badge.ia {
+            background: rgba(167,139,250,0.1);
+            color: #a78bfa;
+        }
+        [data-theme="light"] .sidebar-contact-item .sidebar-badge.paused {
+            background: rgba(245,158,11,0.1);
+            color: #d97706;
+        }
+        [data-theme="light"] .sidebar-contact-item .sidebar-badge.saved-badge {
+            background: rgba(192,38,211,0.1);
+            color: #c026d3;
+        }
 
         [data-theme="dark"] {
             --bg-page: #080c14;
@@ -2695,6 +2753,7 @@
             <button class="topbar-btn disconnect-btn" id="disconnectBtn" title="Desconectar WhatsApp"><i class="fas fa-sign-out-alt"></i></button>
             <button class="topbar-btn restart-btn" id="restartBtn" title="Reiniciar bot"><i class="fas fa-sync-alt"></i></button>
             <button class="topbar-btn theme-btn" id="themeToggle" title="Cambiar tema"><i class="fas fa-moon"></i></button>
+            <button class="topbar-btn logout-btn" id="logoutBtn" title="Cerrar sesión"><i class="fas fa-sign-out-alt" style="color: #ff3366;"></i></button>
         </div>
     </header>
 
@@ -2896,6 +2955,14 @@
 <script>
     (function() {
         const socket = io();
+
+        // Si Socket.IO rechaza por auth, redirect a login
+        socket.on('connect_error', (err) => {
+            if (err.message === 'No autorizado') {
+                window.location.href = '/login';
+            }
+        });
+
         const statusText = document.getElementById('statusText');
         const contactSearch = document.getElementById('contactSearch');
         const contactGrid = document.getElementById('contactGrid');
@@ -4055,6 +4122,14 @@
             const saved = localStorage.getItem('nexus-theme') || 'dark';
             applyTheme(saved);
         })();
+
+        // === LOGOUT ===
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            try {
+                await fetch('/api/logout', { method: 'POST' });
+            } catch (e) {}
+            window.location.href = '/login';
+        });
 
         // === SIDEBAR HAMBURGER ===
         document.getElementById('openSidebar').addEventListener('click', openSidebar);

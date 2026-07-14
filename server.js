@@ -8,13 +8,56 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 const axios = require('axios');
+const session = require('express-session');
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.use(express.static(path.join(__dirname, 'public')));
+const sessionMiddleware = session({
+  secret: 'n1nexus-vip-secret-key-2026',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: null }
+});
+
+app.use(sessionMiddleware);
 app.use(express.json({ limit: '10mb' }));
+
+// Login page (sin auth)
+app.get('/login', (req, res) => {
+  if (req.session.loggedIn) return res.redirect('/');
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+// Login API
+app.post('/api/login', (req, res) => {
+  const { email, password } = req.body;
+  if (email === 'admin@n1nexus.com' && password === 'admin123') {
+    req.session.loggedIn = true;
+    return res.json({ success: true });
+  }
+  return res.status(401).json({ success: false, message: 'Credenciales inválidas' });
+});
+
+// Logout API
+app.post('/api/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.json({ success: true });
+  });
+});
+
+// Middleware de autenticación para todo lo demás
+app.use((req, res, next) => {
+  if (req.session.loggedIn) return next();
+  // Permitir assets estáticos que necesita login.html
+  if (req.path.match(/\.(css|js|woff2?|ttf|eot|svg|png|jpg|ico|map)$/)) return next();
+  if (req.path.startsWith('/socket.io/')) return next();
+  if (req.path === '/login' || req.path === '/api/login') return next();
+  return res.redirect('/login');
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 const logs = [];
 function log(msg) {
@@ -520,6 +563,14 @@ let sock = null;
 const operatorContexts = {};
 
 // ===== SOCKET.IO =====
+io.use((socket, next) => {
+  sessionMiddleware(socket.request, {}, (err) => {
+    if (err) return next(err);
+    if (!socket.request.session.loggedIn) return next(new Error('No autorizado'));
+    next();
+  });
+});
+
 io.on('connection', (socket) => {
   log('Cliente web conectado: ' + socket.id);
   socket.emit('status', status);

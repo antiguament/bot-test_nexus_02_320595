@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N1 NEXUS VIP — Acceso</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0a0e14 0%, #0f172a 50%, #1a0a2e 100%);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(0, 212, 255, 0.06) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .login-container {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      border-radius: 24px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 0 60px rgba(0, 212, 255, 0.06), 0 20px 60px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 1;
+    }
+    .brand {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .brand .logo {
+      font-size: 42px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+    }
+    .brand .sub {
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 4px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      color: rgba(255,255,255,0.6);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 212, 255, 0.12);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .form-group input:focus {
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.06);
+    }
+    .form-group input::placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 8px;
+    }
+    .btn-login:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.2);
+    }
+    .btn-login:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .error-msg {
+      color: #ff3366;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 16px;
+      min-height: 20px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 32px;
+      color: rgba(255,255,255,0.15);
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="brand">
+      <div class="logo">N1 NEXUS</div>
+      <div class="sub">Panel de Control VIP</div>
+    </div>
+    <div class="form-group">
+      <label>Correo electrónico</label>
+      <input type="email" id="emailInput" value="admin@n1nexus.com" placeholder="admin@n1nexus.com" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" id="passwordInput" placeholder="••••••••" autocomplete="current-password" autofocus>
+    </div>
+    <button class="btn-login" id="loginBtn">Ingresar</button>
+    <div class="error-msg" id="errorMsg"></div>
+    <div class="footer">N1 NEXUS VIP &copy; 2026</div>
+  </div>
+
+  <script>
+    const emailInput = document.getElementById('emailInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginBtn = document.getElementById('loginBtn');
+    const errorMsg = document.getElementById('errorMsg');
+
+    function setLoading(loading) {
+      loginBtn.disabled = loading;
+      loginBtn.textContent = loading ? 'Ingresando...' : 'Ingresar';
+    }
+
+    async function doLogin() {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      if (!email || !password) {
+        errorMsg.textContent = 'Completa todos los campos';
+        return;
+      }
+      setLoading(true);
+      errorMsg.textContent = '';
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          window.location.href = '/';
+        } else {
+          errorMsg.textContent = data.message || 'Credenciales inválidas';
+        }
+      } catch (e) {
+        errorMsg.textContent = 'Error de conexión con el servidor';
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loginBtn.addEventListener('click', doLogin);
+    passwordInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
+    emailInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') passwordInput.focus(); });
+  </script>
+</body>
+</html>
