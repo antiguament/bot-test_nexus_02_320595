@@ -1,0 +1,23 @@
+node_modules/
+auth_info/
+.env
+package-lock.json
+.wwebjs_auth/
+.wwebjs_cache/
+.wpp-node-simple/
+*.log
+
+# Runtime artifacts
+.bot.lock
+.deploy.marker
+*.lock
+*.marker
+
+# Sensitive data (client info, conversations, credentials)
+contacts.json
+conversations.json
+bot-knowledge.json
+database/call-log.json
+database/settings.json
+database/saved-contacts.json
+database/predefined-texts.json
