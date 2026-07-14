@@ -54,6 +54,8 @@ let botKnowledge = loadJSON(BOT_KNOWLEDGE_PATH, {});
 
 const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
 const MISTRAL_API_URL = 'https://api.mistral.ai/v1/chat/completions';
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
 let cachedKnowledge = null;
 let knowledgeLastLoaded = 0;
@@ -332,6 +334,40 @@ async function getMistralReply(message, number) {
   }
 }
 
+async function getGeminiReply(message, number) {
+  const history = getHistory(number, 6);
+  const contents = [];
+
+  for (const h of history) {
+    contents.push({
+      role: h.role === 'user' ? 'user' : 'model',
+      parts: [{ text: h.body }]
+    });
+  }
+
+  contents.push({ role: 'user', parts: [{ text: message }] });
+
+  try {
+    const response = await axios.post(`${GEMINI_API_URL}?key=${GOOGLE_API_KEY}`, {
+      system_instruction: { parts: [{ text: buildSystemPrompt() }] },
+      contents,
+      generationConfig: {
+        maxOutputTokens: 400,
+        temperature: 0.7
+      }
+    }, {
+      headers: { 'Content-Type': 'application/json' },
+      timeout: 30000
+    });
+
+    const candidate = response.data?.candidates?.[0];
+    return candidate?.content?.parts?.[0]?.text?.trim() || null;
+  } catch (err) {
+    log(`Error Gemini AI: ${err.message}`);
+    return null;
+  }
+}
+
 // ===== ROUTES =====
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -557,31 +593,93 @@ io.on('connection', (socket) => {
       const lastIncoming = [...msgs].reverse().find(m => m.type === 'incoming');
       const userMessage = lastIncoming ? lastIncoming.body : '(sin mensaje previo)';
 
-      const refinementPrompt = `El usuario pregunto: "${userMessage}"
-El operador escribio esta respuesta como guia: "${draft}"
-Refina y mejora la respuesta del operador. Manten su intencion pero:
-- Usa un tono profesional y cercano
-- Corrige errores ortograficos
-- Mejora la estructura
-- No inventes informacion que no este en el borrador
-Responde SOLO con el texto refinado, sin explicaciones.`;
+      // Construir historial reciente (últimos 3 mensajes)
+      const recentHistory = msgs.slice(-3).map(m => {
+        const who = m.type === 'incoming' ? 'Cliente' : 'NEXUS';
+        return `${who}: "${m.body}"`;
+      }).join('\n');
 
-      const response = await axios.post(MISTRAL_API_URL, {
-        model: 'mistral-tiny',
-        messages: [
-          { role: 'system', content: 'Eres un asistente que refina respuestas para WhatsApp. Responde solo con el texto mejorado.' },
-          { role: 'user', content: refinementPrompt }
-        ],
-        max_tokens: 250
-      }, {
-        headers: {
-          'Authorization': `Bearer ${MISTRAL_API_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        timeout: 30000
-      });
+      // Detectar modo emocional vs comercial
+      const emocionalKeywords = ['triste', 'estres', 'preocupado', 'miedo', 'soledad', 'familia', 'cansado', 'no sé qué hacer', 'difícil', 'problema', 'ansiedad', 'deprimido', 'angustiado', 'confundido'];
+      const isEmocional = emocionalKeywords.some(k => userMessage.toLowerCase().includes(k));
+      const modoInstruccion = isEmocional
+        ? 'El cliente parece estar en un estado emocional. Aplica reglas_transicion: prioriza la escucha y la empatía, NO mezcles ventas en este mensaje, usa un tono de sabiduría y contencion.'
+        : 'El cliente está en modo comercial o consulta neutral. Aplica principios_conversacion: primero conecta, luego propone. Usa guia_preguntas si necesitas entender mejor su necesidad.';
 
-      const refined = response.data.choices[0].message.content;
+      const systemRefinePrompt = buildSystemPrompt() + `\n\nTu tarea es convertir las notas del operador en mensajes listos para enviar al cliente por WhatsApp.
+
+## INSTRUCCIONES DE ROL
+- Eres NEXUS. El operador te escribe una NOTA o INSTRUCCIÓN. Tu trabajo es producir el mensaje final que se enviará al cliente.
+- Si la nota del operador es corta (ej: "info plan Essential", "dile que tenemos PRO", "cuéntale del descuento"), EXPÁNDELA en un mensaje completo usando los datos de catálogos_planes, preguntas_frecuentes y el conocimiento de NEXUS. No te limites a pulir la nota: DESARRÓLLALA.
+- Si la nota del operador ya es un mensaje completo y listo, solo púlelo (corrige ortografía, mejora tono).
+- Responde ÚNICAMENTE con el texto listo para enviar. No incluyas explicaciones, prefacios ni metadatos.
+- Siempre usa los datos reales de catálogos_planes. Si la nota menciona un plan, incluye sus características clave y precio real.
+- No inventes información. Usa solo lo que está en la base de conocimiento (catálogos_planes, preguntas_frecuentes) o en la nota del operador.`;
+
+      const refinementPrompt = `Historial reciente:
+${recentHistory || '(sin historial)'}
+
+El cliente preguntó: "${userMessage}"
+
+Nota del operador (desarróllala en un mensaje completo):
+"${draft}"
+
+${modoInstruccion}
+
+Instrucciones para convertir esta nota en el mensaje final:
+- Si la nota es corta (ej: "info plan X", "dile del PRO", "cuéntale del descuento"), EXPÁNDELA en un mensaje profesional y completo usando los datos de catálogos_planes. Incluye características, precio, y lo que corresponda.
+- Si la nota ya es un mensaje completo, solo púlelo (corrige ortografía, mejora tono y estructura).
+- Aplica instrucciones_longitud: máximo 3 líneas para WhatsApp
+- Usa principios_conversación: primero conecta, luego propone, cierra con puerta abierta
+- Corrige ortografía, tildes y mejora redacción (español de Colombia)
+- Usa emojis con moderación para dar calidez (máximo 1 por mensaje)
+- Dale el tono profesional y cercano de NEXUS
+- Si aplica, usa guia_preguntas para profundizar y entender mejor al cliente
+
+Responde SOLO con el texto final listo para enviar, sin explicaciones ni prefacios.`;
+
+      let refined = null;
+
+      // Intentar Gemini primero
+      if (GOOGLE_API_KEY) {
+        try {
+          const geminiRes = await axios.post(`${GEMINI_API_URL}?key=${GOOGLE_API_KEY}`, {
+            system_instruction: { parts: [{ text: systemRefinePrompt }] },
+            contents: [{ role: 'user', parts: [{ text: refinementPrompt }] }],
+            generationConfig: { maxOutputTokens: 350, temperature: 0.7 }
+          }, {
+            headers: { 'Content-Type': 'application/json' },
+            timeout: 30000
+          });
+          refined = geminiRes.data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+        } catch (e) {
+          log(`Gemini draft error, fallback a Mistral: ${e.message}`);
+        }
+      }
+
+      // Fallback a Mistral si Gemini fallo o no esta configurado
+      if (!refined && MISTRAL_API_KEY) {
+        const mistralRes = await axios.post(MISTRAL_API_URL, {
+          model: 'mistral-tiny',
+          messages: [
+            { role: 'system', content: systemRefinePrompt },
+            { role: 'user', content: refinementPrompt }
+          ],
+          max_tokens: 350
+        }, {
+          headers: {
+            'Authorization': `Bearer ${MISTRAL_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          timeout: 30000
+        });
+        refined = mistralRes.data.choices[0].message.content;
+      }
+
+      if (!refined) {
+        return socket.emit('send-result', { success: false, message: 'No se pudo refinar la respuesta (Gemini y Mistral fallaron)' });
+      }
+
       await sock.sendMessage(toChatId(num), { text: refined });
 
       const ts = new Date().toISOString();
@@ -985,9 +1083,12 @@ async function startBot() {
         continue;
       }
 
-      // Intentar Mistral AI, si falla usar keywords
+      // Intentar Gemini primero, luego Mistral, luego keywords
       let autoReply = null;
-      if (MISTRAL_API_KEY) {
+      if (GOOGLE_API_KEY) {
+        autoReply = await getGeminiReply(body, number);
+      }
+      if (!autoReply && MISTRAL_API_KEY) {
         autoReply = await getMistralReply(body, number);
       }
       if (!autoReply) {
