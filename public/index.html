@@ -73,10 +73,6 @@
         :root .composer {
             border-top: 1px solid rgba(0,0,0,0.14);
         }
-        :root .contacts-grid-wrapper {
-            border-right: 1px solid rgba(0,0,0,0.14);
-            background: linear-gradient(180deg, #f0f2f6 0%, #eceef2 100%);
-        }
         :root .topbar {
             border-bottom: 1px solid rgba(0,0,0,0.18);
             background: linear-gradient(90deg, rgba(255,255,255,0.97) 0%, rgba(250,252,255,0.95) 50%, rgba(255,248,252,0.95) 100%);
@@ -119,33 +115,8 @@
         :root .messages::-webkit-scrollbar-thumb {
             background: rgba(0,0,0,0.15);
         }
-        :root .contacts-grid::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.04);
-        }
-        :root .contacts-grid::-webkit-scrollbar-thumb {
-            background: rgba(0,0,0,0.2);
-            border: none;
-        }
-        :root .predefined-list::-webkit-scrollbar-thumb {
+:root .predefined-list::-webkit-scrollbar-thumb {
             background: rgba(0,0,0,0.15);
-        }
-        :root .contact-card {
-            background: linear-gradient(135deg, rgba(0,153,204,0.08) 0%, rgba(167,139,250,0.06) 100%);
-            border: 1px solid rgba(0,0,0,0.1);
-        }
-        :root .contact-card:hover {
-            background: linear-gradient(135deg, rgba(0,153,204,0.15) 0%, rgba(167,139,250,0.12) 100%);
-            border-color: rgba(0,153,204,0.35);
-            box-shadow: 0 4px 16px rgba(0,153,204,0.12);
-        }
-        :root .contact-card.active {
-            background: linear-gradient(135deg, rgba(0,153,204,0.18) 0%, rgba(167,139,250,0.15) 100%);
-            border-color: var(--accent-purple);
-            border-left: 3px solid var(--accent-purple);
-            box-shadow: 0 4px 24px rgba(167,139,250,0.2);
-        }
-        :root .contact-card .avatar-mini {
-            background: linear-gradient(135deg, #0099cc, #10b981);
         }
         :root .sidebar-contact-item:hover {
             background: linear-gradient(135deg, rgba(0,153,204,0.1) 0%, rgba(167,139,250,0.08) 100%);
@@ -171,24 +142,6 @@
         }
         [data-theme="light"] .sidebar-contact-item .sidebar-notes {
             color: #d97706;
-        }
-        [data-theme="light"] .contact-card {
-            background: rgba(255,255,255,0.7);
-            border: 1px solid rgba(0,0,0,0.12);
-        }
-        [data-theme="light"] .contact-card:hover {
-            background: rgba(255,255,255,0.9);
-            border-color: rgba(167,139,250,0.3);
-            box-shadow: 0 4px 16px rgba(167,139,250,0.1);
-        }
-        [data-theme="light"] .contact-card.active {
-            background: linear-gradient(135deg, rgba(167,139,250,0.12) 0%, rgba(244,114,182,0.08) 100%);
-            border-color: var(--accent-purple);
-            border-left: 3px solid var(--accent-purple);
-            box-shadow: 0 4px 24px rgba(167,139,250,0.12);
-        }
-        [data-theme="light"] .contact-card .avatar-mini {
-            background: linear-gradient(135deg, #a78bfa, #f472b6);
         }
         [data-theme="light"] .sidebar-contact-item:hover {
             background: linear-gradient(135deg, rgba(167,139,250,0.08) 0%, rgba(244,114,182,0.04) 100%);
@@ -333,26 +286,8 @@
         [data-theme="dark"] .right-panel {
             background: linear-gradient(180deg, #0f1622 0%, #0d1420 100%);
         }
-        [data-theme="dark"] .contacts-grid-wrapper {
-            background: linear-gradient(180deg, #0d1420 0%, #0b111c 100%);
-        }
         [data-theme="dark"] .messages {
             background: linear-gradient(135deg, #09101a 0%, #0b121c 50%, #0a0e1a 100%);
-        }
-        [data-theme="dark"] .contact-card {
-            background: linear-gradient(135deg, rgba(0,212,255,0.08) 0%, rgba(168,85,247,0.06) 100%);
-            border: 1px solid rgba(0,212,255,0.12);
-        }
-        [data-theme="dark"] .contact-card:hover {
-            background: linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(168,85,247,0.12) 100%);
-            border-color: rgba(0,212,255,0.35);
-            box-shadow: 0 4px 20px rgba(0,212,255,0.12);
-        }
-        [data-theme="dark"] .contact-card.active {
-            background: linear-gradient(135deg, rgba(0,212,255,0.2) 0%, rgba(168,85,247,0.18) 100%);
-            border-color: var(--accent-purple);
-            border-left: 3px solid var(--accent-purple);
-            box-shadow: 0 4px 30px rgba(168,85,247,0.2);
         }
         [data-theme="dark"] .sidebar-contact-item:hover {
             background: linear-gradient(135deg, rgba(0,212,255,0.1) 0%, rgba(168,85,247,0.06) 100%);
@@ -379,10 +314,6 @@
         }
         [data-theme="dark"] .messages::-webkit-scrollbar-thumb {
             background: rgba(0,212,255,0.12);
-        }
-        [data-theme="dark"] .contacts-grid::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, rgba(0,212,255,0.4) 0%, rgba(99,102,241,0.4) 100%);
-            border: 1px solid rgba(0,212,255,0.2);
         }
 
         [data-theme="hacker"] {
@@ -453,7 +384,7 @@
 
         html { transition: color-scheme 0.3s ease; }
         html, body, .dashboard, .topbar, .composer, .right-panel, .messages,
-        .contacts-grid-wrapper, .contacts-sidebar, .modal, .draft-panel {
+        .contacts-sidebar, .modal, .draft-panel {
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -481,9 +412,6 @@
         [data-theme="hacker"] .msg.system { color: var(--msg-text-system); }
         [data-theme="hacker"] .msg.error { color: var(--msg-text-error); }
         [data-theme="hacker"] .msg .meta .from { opacity: 0.9; }
-        [data-theme="hacker"] .contacts-grid-header h3 {
-            text-shadow: 0 0 5px rgba(255,215,0,0.3);
-        }
         [data-theme="hacker"] body {
             background: var(--bg-page);
         }
@@ -496,29 +424,8 @@
         [data-theme="hacker"] .right-panel {
             background: var(--bg-panel);
         }
-        [data-theme="hacker"] .contacts-grid-wrapper {
-            background: var(--contacts-bg);
-        }
         [data-theme="hacker"] .messages {
             background: var(--bg-chat);
-        }
-        [data-theme="hacker"] .contact-card {
-            background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,180,0,0.15) 100%);
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-        [data-theme="hacker"] .contact-card:hover {
-            background: linear-gradient(135deg, rgba(255,215,0,0.3) 0%, rgba(255,200,50,0.25) 100%);
-            border-color: rgba(255,215,0,0.5);
-            box-shadow: 0 4px 15px rgba(255,215,0,0.2);
-        }
-        [data-theme="hacker"] .contact-card.active {
-            background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,170,0,0.15) 100%);
-            border-color: #ffd700;
-            border-left: 3px solid #ffd700;
-            box-shadow: 0 0 25px rgba(255,215,0,0.15);
-        }
-        [data-theme="hacker"] .contact-card .avatar-mini {
-            background: linear-gradient(135deg, #ffd700, #ffaa00);
         }
         [data-theme="hacker"] .sidebar-contact-item:hover {
             background: linear-gradient(135deg, rgba(255,215,0,0.12) 0%, rgba(255,200,50,0.08) 100%);
@@ -542,10 +449,6 @@
         }
         [data-theme="hacker"] .messages::-webkit-scrollbar-thumb {
             background: rgba(255,215,0,0.12);
-        }
-        [data-theme="hacker"] .contacts-grid::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, rgba(255,215,0,0.4) 0%, rgba(255,200,50,0.4) 100%);
-            border: 1px solid rgba(255,215,0,0.2);
         }
         [data-theme="hacker"] .sidebar-contact-item.saved .sidebar-avatar {
             background: linear-gradient(135deg, #ffaa00, #e69500);
@@ -573,9 +476,6 @@
         }
         [data-theme="hacker"] .composer {
             border-top: 1px solid rgba(255,215,0,0.06);
-        }
-        [data-theme="hacker"] .contacts-grid::-webkit-scrollbar-track {
-            background: rgba(255,215,0,0.05);
         }
         [data-theme="hacker"] .predefined-list::-webkit-scrollbar-thumb {
             background: rgba(255,215,0,0.1);
@@ -713,358 +613,14 @@
             border-right: 1px solid var(--border-subtle);
         }
 
-        .contacts-grid-wrapper {
-            padding: 10px 14px 8px 14px;
-            background: var(--contacts-bg);
-            border-bottom: 1px solid var(--border-glass);
-            flex-shrink: 0;
+
+        .main-area {
+            grid-column: 1 / 2;
+            grid-row: 2 / 4;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
-        }
-
-        .contacts-grid-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4px;
-        }
-
-        .contacts-grid-header h3 {
-            color: var(--text-muted);
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .contacts-grid-header .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .contacts-grid-header .add-btn {
-            background: rgba(var(--accent-purple-rgb), 0.08);
-            border: 1px solid rgba(var(--accent-purple-rgb), 0.12);
-            color: var(--accent-purple);
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.15s;
-            white-space: nowrap;
-        }
-
-        .contacts-grid-header .add-btn:hover {
-            background: rgba(var(--accent-purple-rgb), 0.15);
-            border-color: rgba(var(--accent-purple-rgb), 0.25);
-        }
-
-        .contacts-grid-header .search-mini {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: var(--bg-input);
-            padding: 2px 10px;
-            border-radius: 40px;
-            border: 1px solid var(--border-glass);
-        }
-
-        .contacts-grid-header .search-mini i {
-            color: var(--text-placeholder);
-            font-size: 10px;
-        }
-
-        .contacts-grid-header .search-mini input {
-            background: transparent;
-            border: none;
-            padding: 4px 2px;
-            color: var(--text-primary);
-            font-size: 12px;
-            width: 100px;
-            outline: none;
-        }
-
-        .contacts-grid-header .search-mini input::placeholder {
-            color: var(--text-placeholder);
-        }
-
-        .contacts-grid {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding: 4px 0 8px 0;
-            max-height: none;
-        }
-
-        .contacts-grid::-webkit-scrollbar {
-            height: 6px;
-        }
-        .contacts-grid::-webkit-scrollbar-track {
-            background: rgba(0, 212, 255, 0.05);
-            border-radius: 20px;
-            margin: 0 4px;
-        }
-        .contacts-grid::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, rgba(0, 212, 255, 0.4) 0%, rgba(99, 102, 241, 0.4) 100%);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
-        .contacts-grid::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(90deg, rgba(0, 212, 255, 0.6) 0%, rgba(99, 102, 241, 0.6) 100%);
-        }
-
-        
-.contact-card {
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.25) 0%, rgba(59, 130, 246, 0.2) 100%);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 12px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(6, 182, 212, 0.3);
-    flex: 0 0 auto;
-    min-width: 180px;
-    height: 58px;
-    scroll-snap-align: start;
-}
-
-/* Efecto al pasar el mouse (se vuelve más brillante y alegre) */
-.contact-card:hover {
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.35) 0%, rgba(99, 102, 241, 0.3) 100%);
-    border-color: rgba(6, 182, 212, 0.6);
-    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
-}
-
-
-
-
-        @media (max-width: 700px) {
-            .contacts-grid {
-                display: flex;
-                overflow-x: auto;
-                overflow-y: hidden;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                gap: 10px;
-                padding: 4px 0;
-                max-height: none;
-            }
-
-            .contacts-grid::-webkit-scrollbar {
-                height: 0;
-                display: none;
-            }
-
-            .contact-card {
-                flex: 0 0 calc(100% - 20px);
-                scroll-snap-align: start;
-                min-width: calc(100% - 20px);
-                height: 60px;
-            }
-
-            .contact-card .avatar-mini {
-                width: 36px;
-                height: 36px;
-                font-size: 13px;
-            }
-
-            .contact-card .info-mini .name-mini {
-                font-size: 13px;
-            }
-
-            .contact-card .info-mini .number-mini {
-                font-size: 11px;
-            }
-        }
-
-        .contact-card:hover {
-            background: var(--bg-hover);
-            border-color: rgba(0, 212, 255, 0.1);
-        }
-
-        .contact-card.active {
-            background: var(--bg-active);
-            border-color: #00d4ff;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.04);
-        }
-
-        .contact-card .avatar-mini {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00d4ff, #00ff88);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            color: #0a0e14;
-            flex-shrink: 0;
-        }
-
-        .contact-card .info-mini {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .contact-card .info-mini .name-mini {
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-primary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .contact-card .info-mini .number-mini {
-            font-size: 12px;
-            color: var(--text-muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .contact-card .badge-mini {
-            font-size: 11px;
-            font-weight: 700;
-            background: rgba(0, 212, 255, 0.1);
-            color: #00d4ff;
-            padding: 3px 10px;
-            border-radius: 40px;
-            white-space: nowrap;
-        }
-
-        .contact-card .badge-mini.paused {
-            background: rgba(255, 193, 7, 0.08);
-            color: #fbbf24;
-        }
-
-        .contact-card .badge-mini.saved-badge {
-            background: rgba(168, 85, 247, 0.1);
-            color: #a855f7;
-        }
-
-        .contact-card .unread-mini {
-            background: #ff3366;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            min-width: 20px;
-            height: 20px;
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 6px;
-        }
-
-        /* Contactos guardados - Estilo púrpura */
-        .contact-card.saved {
-            border-color: rgba(168, 85, 247, 0.15);
-        }
-
-        .contact-card.saved:hover {
-            border-color: rgba(168, 85, 247, 0.3);
-            background: var(--bg-hover);
-        }
-
-        .contact-card.saved .avatar-mini {
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
-        }
-
-        .contact-card.saved .badge-mini {
-            background: rgba(168, 85, 247, 0.1);
-            color: #a855f7;
-        }
-
-        .contact-card.active {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.4) 0%, rgba(99, 102, 241, 0.35) 100%);
-            border-color: rgba(6, 182, 212, 0.6);
-            box-shadow: 
-                0 0 20px rgba(6, 182, 212, 0.2),
-                inset 0 0 15px rgba(6, 182, 212, 0.08);
-        }
-
-        .contact-card.saved.active {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(139, 92, 246, 0.35) 100%);
-            border-color: rgba(168, 85, 247, 0.6);
-            box-shadow: 
-                0 0 20px rgba(168, 85, 247, 0.2),
-                inset 0 0 15px rgba(168, 85, 247, 0.08);
-        }
-
-        .contact-card.unread {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.15) 100%);
-            border-color: rgba(239, 68, 68, 0.35);
-            box-shadow: 
-                0 0 15px rgba(239, 68, 68, 0.1),
-                inset 0 0 10px rgba(239, 68, 68, 0.05);
-        }
-
-        .contact-card.unread:hover {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.28) 0%, rgba(220, 38, 38, 0.22) 100%);
-            border-color: rgba(239, 68, 68, 0.5);
-        }
-
-        .contact-card.unread .avatar-mini {
-            box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
-        }
-
-        .contact-card.saved .saved-actions {
-            display: flex;
-            gap: 2px;
-            opacity: 0;
-            transition: 0.15s;
-        }
-
-        .contact-card.saved:hover .saved-actions {
-            opacity: 1;
-        }
-
-        .contact-card.saved .saved-actions .action-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-dim);
-            font-size: 10px;
-            cursor: pointer;
-            padding: 3px 5px;
-            border-radius: 4px;
-            transition: 0.15s;
-        }
-
-        .contact-card.saved .saved-actions .action-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-secondary);
-        }
-
-        .contact-card.saved .saved-actions .action-btn.delete:hover {
-            color: #ff6b8a;
-        }
-
-        .contact-card.saved .saved-actions .action-btn.edit:hover {
-            color: #a855f7;
-        }
-
-        .contact-card.saved .saved-actions .action-btn.note-btn-saved {
-            color: #fbbf24;
-        }
-
-        .contact-card.saved .saved-actions .action-btn.note-btn-saved:hover {
-            color: #fbbf24;
-            background: rgba(251, 191, 36, 0.15);
-        }
-
-        .contact-card.saved .saved-actions .action-btn.note-btn-saved.has-note {
-            color: #fbbf24;
-            opacity: 1;
+            border-right: 1px solid var(--border-subtle);
         }
 
         .chat-area {
@@ -2028,9 +1584,6 @@
                 flex: 1;
             }
 
-            .contacts-grid {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            }
         }
 
         @media (max-width: 700px) {
@@ -2681,14 +2234,6 @@
             animation: fadeIn 0.3s ease;
         }
 
-        .contacts-grid-header h3 {
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .contacts-grid-header h3:hover {
-            color: #00d4ff;
-        }
 
         @media (max-width: 700px) {
             .contacts-sidebar {
@@ -2809,20 +2354,7 @@
     </header>
 
     <div class="main-area">
-        <div class="contacts-grid-wrapper">
-            <div class="contacts-grid-header">
-                <h3><i class="fas fa-users" style="margin-right: 6px;"></i> Contactos</h3>
-                <div class="header-actions">
-                    <button class="add-btn" id="addContactBtn"><i class="fas fa-plus"></i> Nuevo</button>
-                    <div class="search-mini">
-                        <i class="fas fa-search"></i>
-                        <input id="contactSearch" type="text" placeholder="Filtrar..." />
-                    </div>
-                </div>
-            </div>
-            <div class="contacts-grid" id="contactGrid"></div>
-        </div>
-
+        
         <div class="chat-area">
             <div class="messages" id="messagesBox">
                 <div class="empty-chat">
@@ -3015,8 +2547,6 @@
         });
 
         const statusText = document.getElementById('statusText');
-        const contactSearch = document.getElementById('contactSearch');
-        const contactGrid = document.getElementById('contactGrid');
         const messagesBox = document.getElementById('messagesBox');
         const phoneInput = document.getElementById('phoneInput');
         const msgInput = document.getElementById('msgInput');
@@ -3032,7 +2562,6 @@
         const cancelDraftBtn = document.getElementById('cancelDraftBtn');
         const predefinedList = document.getElementById('predefinedList');
         const addTextBtn = document.getElementById('addTextBtn');
-        const addContactBtn = document.getElementById('addContactBtn');
         const textModal = document.getElementById('textModal');
         const contactModal = document.getElementById('contactModal');
         const notesModal = document.getElementById('notesModal');
@@ -3097,110 +2626,6 @@
             return contacts.find(c => normalizeNumber(c.number) === normalizeNumber(number));
         }
 
-        function renderContacts() {
-            const query = contactSearch.value.trim().toLowerCase();
-            contactGrid.innerHTML = '';
-
-            // Render active contacts
-            const filteredActive = contacts.filter(c => {
-                const text = `${c.name || ''} ${c.number || ''} ${c.lastMessage || ''} ${c.notes || ''}`.toLowerCase();
-                return text.includes(query);
-            });
-
-            filteredActive.forEach(contact => {
-                const number = normalizeNumber(contact.number);
-                const displayName = contact.name || number;
-                const isActive = number === selectedNumber;
-                const botPaused = contact.botEnabled === false;
-                const unread = contact.unreadCount || 0;
-                const notes = contact.notes || '';
-                const colors = getContactColor(displayName, number);
-                const hasNote = notes.length > 0;
-
-                const card = document.createElement('div');
-                card.className = `contact-card${isActive ? ' active' : ''}${unread > 0 ? ' unread' : ''}`;
-                card.style.position = 'relative';
-                card.innerHTML = `
-                    <div class="avatar-mini" style="background: linear-gradient(135deg, ${colors[0]}, ${colors[1]});">${getInitials(displayName)}</div>
-                    <div class="info-mini">
-                        <div class="name-mini">${escapeHtml(displayName)}</div>
-                        <div class="number-mini">${escapeHtml(number)}</div>
-                    </div>
-                    ${hasNote ? `<div class="notes-mini">${escapeHtml(notes)}</div>` : ''}
-                    ${unread > 0 ? `<div class="unread-mini">${unread}</div>` : ''}
-                    <span class="badge-mini${botPaused ? ' paused' : ''}">${botPaused ? 'PAUSA' : 'IA'}</span>
-                    <button class="note-btn${hasNote ? ' has-note' : ''}" title="${hasNote ? 'Editar nota' : 'Agregar nota'}"><i class="fas fa-sticky-note"></i></button>
-                `;
-                card.addEventListener('click', (e) => {
-                    if (e.target.closest('.note-btn')) return;
-                    selectContact(number, contact.name || number);
-                });
-                card.querySelector('.note-btn').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    openNotesModal(number, displayName, notes);
-                });
-                contactGrid.appendChild(card);
-            });
-
-            // Render saved contacts
-            const filteredSaved = savedContacts.filter(c => {
-                const text = `${c.name || ''} ${c.number || ''} ${c.notes || ''}`.toLowerCase();
-                return text.includes(query);
-            });
-
-            filteredSaved.forEach(contact => {
-                const number = normalizeNumber(contact.number);
-                const displayName = contact.name || number;
-                const isActive = number === selectedNumber;
-                const notes = contact.notes || '';
-                const colors = getContactColor(displayName, number);
-                const hasNote = notes.length > 0;
-
-                const card = document.createElement('div');
-                card.className = `contact-card saved${isActive ? ' active' : ''}`;
-                card.innerHTML = `
-                    <div class="avatar-mini" style="background: linear-gradient(135deg, ${colors[0]}, ${colors[1]});">${getInitials(displayName)}</div>
-                    <div class="info-mini">
-                        <div class="name-mini">${escapeHtml(displayName)}</div>
-                        <div class="number-mini">${escapeHtml(number)}</div>
-                    </div>
-                    ${hasNote ? `<div class="notes-mini">${escapeHtml(notes)}</div>` : ''}
-                    <span class="badge-mini saved-badge">GUARDADO</span>
-                    <div class="saved-actions">
-                        <button class="action-btn note-btn-saved${hasNote ? ' has-note' : ''}" title="${hasNote ? 'Editar nota' : 'Agregar nota'}"><i class="fas fa-sticky-note"></i></button>
-                        <button class="action-btn edit-btn" title="Editar"><i class="fas fa-edit"></i></button>
-                        <button class="action-btn delete-btn" title="Eliminar"><i class="fas fa-trash"></i></button>
-                    </div>
-                `;
-                card.addEventListener('click', (e) => {
-                    if (e.target.closest('.action-btn')) return;
-                    selectContact(number, contact.name || number);
-                });
-                card.querySelector('.note-btn-saved').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    openNotesModal(number, displayName, notes);
-                });
-                card.querySelector('.edit-btn').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    openContactModal(contact);
-                });
-                card.querySelector('.delete-btn').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    deleteSavedContact(contact.id);
-                });
-                contactGrid.appendChild(card);
-            });
-
-            if (filteredActive.length === 0 && filteredSaved.length === 0) {
-                contactGrid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; color: #4b5a6e; font-size: 13px; padding: 10px 0;">
-                        <i class="fas fa-users" style="display: block; margin-bottom: 4px;"></i>
-                        No hay contactos
-                    </div>
-                `;
-                return;
-            }
-        }
 
         function renderConversation() {
             const contact = getContact(selectedNumber);
@@ -3267,7 +2692,7 @@
         function selectContact(number, name = '') {
             selectedNumber = normalizeNumber(number);
             phoneInput.value = selectedNumber;
-            renderContacts();
+            renderSidebarContacts();
             renderConversation();
             msgInput.focus();
         }
@@ -3307,7 +2732,7 @@
             socket.emit('delete-chat', { number: selectedNumber });
             selectedNumber = '';
             phoneInput.value = '';
-            renderContacts();
+            renderSidebarContacts();
             renderConversation();
         }
 
@@ -3384,7 +2809,7 @@
             if (selectedNumber === key) {
                 renderConversation();
             }
-            renderContacts();
+            renderSidebarContacts();
         }
 
         async function loadPredefinedTexts() {
@@ -3487,7 +2912,7 @@
         }
 
         function renderSavedContacts() {
-            renderContacts();
+            renderSidebarContacts();
         }
 
         async function saveSavedContact(contactData) {
@@ -3576,7 +3001,7 @@
 
         socket.on('contacts', (data) => {
             contacts = data || [];
-            renderContacts();
+            renderSidebarContacts();
         });
 
         socket.on('conversations', (data) => {
@@ -3607,7 +3032,6 @@
 
         sendBtn.addEventListener('click', sendManualMessage);
         msgInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendManualMessage(); });
-        contactSearch.addEventListener('input', renderContacts);
 
         toggleBotBtn.addEventListener('click', () => {
             if (!selectedNumber) return;
@@ -3730,7 +3154,6 @@
             savePredefinedText({ emoji: emoji || '💬', tag: tag || 'Personalizado', text });
         });
 
-        addContactBtn.addEventListener('click', openContactModal);
         document.getElementById('cancelContactBtn').addEventListener('click', closeContactModal);
         document.getElementById('saveContactBtn').addEventListener('click', () => {
             const name = document.getElementById('contactName').value.trim();
@@ -3869,7 +3292,6 @@
             });
         }
 
-        document.querySelector('.contacts-grid-header h3').addEventListener('click', openSidebar);
         document.getElementById('closeSidebar').addEventListener('click', closeSidebar);
         contactsSidebar.addEventListener('click', (e) => {
             if (e.target === contactsSidebar) closeSidebar();
@@ -4186,7 +3608,7 @@
         document.getElementById('openSidebar').addEventListener('click', openSidebar);
 
         async function init() {
-            renderContacts();
+            renderSidebarContacts();
             renderConversation();
             await loadPredefinedTexts();
             await loadSavedContacts();
