@@ -333,13 +333,16 @@ Responde en español de Colombia, con tono profesional, cercano, claro y orienta
 Tu objetivo es ayudar a prospectos y clientes a encontrar la solución digital perfecta para su negocio.`;
   const rules = `No inventes datos que no estén en la base de conocimiento.
 Si falta información, invita a escribir por WhatsApp para asesoría personalizada.
-Mantén respuestas breves para WhatsApp, idealmente entre 1 y 4 líneas, salvo que el usuario pida más detalle.`;
+Mantén respuestas breves para WhatsApp: máximo 2-3 líneas por respuesta. Para describir planes, máximo 5-6 líneas.`;
 
   // Enviar SOLO datos esenciales, no todo el JSON
   const plans = k.catalogos_planes ? JSON.stringify(k.catalogos_planes, null, 2) : '';
   const faq = k.preguntas_frecuentes ? JSON.stringify(k.preguntas_frecuentes) : '';
+  const guideKw = k.guia_keywords ? JSON.stringify(k.guia_keywords, null, 2) : '';
+  const microEd = k.micro_educacion ? JSON.stringify(k.micro_educacion, null, 2) : '';
+  const urlsEst = k.urls_estrategicas ? JSON.stringify(k.urls_estrategicas, null, 2) : '';
 
-  return `${customPrompt}\n\n${rules}\n\nPlanes:\n${plans}\n\nPreguntas frecuentes:\n${faq}`;
+  return `${customPrompt}\n\n${rules}\n\nPlanes:\n${plans}\n\nPreguntas frecuentes:\n${faq}\n\nGuía de keywords:\n${guideKw}\n\nMicro educación (tips web):\n${microEd}\n\nURLs estratégicas:\n${urlsEst}`;
 }
 
 async function getMistralReply(message, number) {
