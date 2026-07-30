@@ -8,15 +8,15 @@
     <style>
         /* === THEME VARIABLES === */
         :root {
-            --bg-page: #e8ecf0;
-            --bg-dashboard: #ffffff;
-            --bg-panel: #f0f2f6;
-            --bg-chat: #f4f5f7;
-            --bg-input: #e9ecf0;
-            --bg-surface: rgba(255,255,255,0.95);
+            --bg-page: #dce8f0;
+            --bg-dashboard: #f0f6ff;
+            --bg-panel: #e8f0f8;
+            --bg-chat: #ecf2f8;
+            --bg-input: #e0eaf2;
+            --bg-surface: rgba(240,246,255,0.95);
             --bg-hover: rgba(0,153,204,0.08);
             --bg-active: rgba(0,153,204,0.15);
-            --bg-glass: rgba(255,255,255,0.85);
+            --bg-glass: rgba(240,246,255,0.85);
             --text-primary: #0c1424;
             --text-secondary: #2c3e50;
             --text-muted: #5a6a7e;
@@ -60,25 +60,47 @@
         }
 
         :root body {
-            background: linear-gradient(145deg, #dce3ec 0%, #e8eaef 30%, #f0eaef 60%, #ece4eb 100%);
+            background: linear-gradient(145deg, #0366c9 0%, #dce8f0 30%, #e4eaf2 60%, #dce4f0 100%);
         }
         :root .dashboard {
-            border: 1px solid rgba(0,0,0,0.15);
-            background: linear-gradient(145deg, #ffffff 0%, #fafcff 50%, #fefafe 100%);
+            border: 1px solid rgba(0,0,0,0.12);
+            background: linear-gradient(145deg, #f0f6ff 0%, #ecf2fa 50%, #f2f4fc 100%);
         }
         :root .right-panel {
-            border-left: 1px solid rgba(0,0,0,0.14);
-            background: linear-gradient(180deg, #f2f4f8 0%, #f0f0f6 100%);
-        }
-        :root .composer {
-            border-top: 1px solid rgba(0,0,0,0.14);
+            border-left: 1px solid rgba(0,0,0,0.12);
+            background: linear-gradient(180deg, #e8f0f8 0%, #e4ecf4 100%);
         }
         :root .topbar {
-            border-bottom: 1px solid rgba(0,0,0,0.18);
-            background: linear-gradient(90deg, rgba(255,255,255,0.97) 0%, rgba(250,252,255,0.95) 50%, rgba(255,248,252,0.95) 100%);
+            border-bottom: 1px solid rgba(0,0,0,0.15);
+            background: linear-gradient(90deg, rgba(240,246,255,0.97) 0%, rgba(236,242,250,0.95) 50%, rgba(242,244,252,0.95) 100%);
         }
         :root .messages {
-            background: linear-gradient(135deg, #f5f6f8 0%, #f0f2f6 50%, #f4f0f5 100%);
+            
+          
+      background: 
+  /* Puntos con glow (resplandor) */
+  radial-gradient(circle at 20% 30%, rgba(255,255,255,0.8) 2px, rgba(200,220,255,0.3) 8px, transparent 10px),
+  radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 2px, rgba(200,220,255,0.3) 8px, transparent 10px),
+  radial-gradient(circle at 80% 70%, rgba(255,255,255,0.8) 2px, rgba(200,220,255,0.3) 8px, transparent 10px),
+  radial-gradient(circle at 30% 70%, rgba(255,255,255,0.8) 2px, rgba(200,220,255,0.3) 8px, transparent 10px),
+  radial-gradient(circle at 70% 30%, rgba(255,255,255,0.8) 2px, rgba(200,220,255,0.3) 8px, transparent 10px),
+  /* Líneas que conectan puntos (malla de rombos) */
+  repeating-linear-gradient(45deg, 
+    transparent, 
+    transparent 30px, 
+    rgba(255, 255, 255, 0.3) 30px, 
+    rgba(255, 255, 255, 0.3) 31px
+  ),
+  repeating-linear-gradient(-45deg, 
+    transparent, 
+    transparent 30px, 
+    rgba(255, 255, 255, 0.3) 30px, 
+    rgba(255, 255, 255, 0.3) 31px
+  ),
+  /* Gradiente con más luz */
+  linear-gradient(135deg, #dce9ff 0%, #c5d8f5 50%, #e6ddf5 100%);
+background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+            
         }
         :root .sidebar-contact-item .sidebar-badge.ia {
             background: rgba(0,153,204,0.1);
@@ -131,8 +153,22 @@
         :root .sidebar-contact-item .sidebar-avatar {
             background: linear-gradient(135deg, #0099cc, #10b981);
         }
+        [data-theme="light"] .sidebar-contact-item {
+            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(248,250,252,0.5) 100%);
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+        [data-theme="light"] .sidebar-contact-item:hover {
+            background: linear-gradient(135deg, rgba(167,139,250,0.08) 0%, rgba(244,114,182,0.04) 100%);
+            border-color: rgba(167,139,250,0.18);
+        }
+        [data-theme="light"] .sidebar-contact-item.active {
+            background: linear-gradient(135deg, rgba(167,139,250,0.15) 0%, rgba(244,114,182,0.1) 100%);
+            border-color: var(--accent-purple);
+            border-left: 3px solid var(--accent-purple);
+            box-shadow: 0 4px 20px rgba(167,139,250,0.1);
+        }
         [data-theme="light"] .sidebar-contact-item .sidebar-name {
-            color: #1e293b;
+            font-weight: 650;
         }
         [data-theme="light"] .sidebar-contact-item .sidebar-number {
             color: #64748b;
@@ -172,9 +208,23 @@
             color: #c026d3;
         }
         [data-theme="light"] .contacts-sidebar {
-            background: linear-gradient(180deg, #f5f7fa 0%, #eef0f5 50%, #f0eef4 100%);
-            border-right: 1px solid rgba(0,0,0,0.12);
-            box-shadow: 4px 0 30px rgba(0,0,0,0.1);
+            background: linear-gradient(180deg, #ecf2fa 0%, #e4ecf4 50%, #e8ecf6 100%);
+            border-right: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 4px 0 30px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        [data-theme="light"] .contacts-sidebar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 30px,
+                rgba(167,139,250,0.02) 30px,
+                rgba(167,139,250,0.02) 31px
+            );
+            pointer-events: none;
         }
         [data-theme="light"] .sidebar-header {
             background: linear-gradient(135deg, rgba(167,139,250,0.1) 0%, rgba(244,114,182,0.06) 100%);
@@ -199,19 +249,20 @@
             border-bottom: 1px solid rgba(0,0,0,0.06);
         }
         [data-theme="light"] .sidebar-nav-item {
-            background: rgba(0,0,0,0.04);
-            border: 1px solid rgba(0,0,0,0.06);
+            background: linear-gradient(135deg, rgba(167,139,250,0.08) 0%, rgba(244,114,182,0.04) 100%);
+            border: 1px solid rgba(167,139,250,0.12);
             color: #64748b;
         }
         [data-theme="light"] .sidebar-nav-item:hover {
-            background: rgba(167,139,250,0.08);
-            border-color: rgba(167,139,250,0.18);
+            background: linear-gradient(135deg, rgba(167,139,250,0.15) 0%, rgba(244,114,182,0.1) 100%);
+            border-color: rgba(167,139,250,0.25);
+            color: #4b5563;
         }
         [data-theme="light"] .sidebar-nav-item.active {
-            background: linear-gradient(135deg, rgba(167,139,250,0.18) 0%, rgba(244,114,182,0.12) 100%);
-            border-color: rgba(167,139,250,0.3);
+            background: linear-gradient(135deg, rgba(167,139,250,0.25) 0%, rgba(244,114,182,0.18) 100%);
+            border-color: rgba(167,139,250,0.4);
             color: #7c3aed;
-            box-shadow: none;
+            box-shadow: 0 2px 12px rgba(167,139,250,0.12);
         }
         [data-theme="light"] .sidebar-empty i {
             color: #cbd5e1;
@@ -287,8 +338,66 @@
             background: linear-gradient(180deg, #0f1622 0%, #0d1420 100%);
         }
         [data-theme="dark"] .messages {
-            background: linear-gradient(135deg, #09101a 0%, #0b121c 50%, #0a0e1a 100%);
-        }
+
+
+
+
+     background:
+        /* Neuronas principales */
+        radial-gradient(circle at 15% 30%, rgba(150, 220, 255, 0.9) 4px, rgba(100, 200, 255, 0.2) 14px, transparent 18px),
+        radial-gradient(circle at 45% 60%, rgba(150, 220, 255, 0.9) 4px, rgba(100, 200, 255, 0.2) 14px, transparent 18px),
+        radial-gradient(circle at 75% 25%, rgba(150, 220, 255, 0.9) 4px, rgba(100, 200, 255, 0.2) 14px, transparent 18px),
+        radial-gradient(circle at 30% 80%, rgba(150, 220, 255, 0.7) 3px, rgba(100, 200, 255, 0.15) 12px, transparent 15px),
+        radial-gradient(circle at 65% 70%, rgba(150, 220, 255, 0.7) 3px, rgba(100, 200, 255, 0.15) 12px, transparent 15px),
+        radial-gradient(circle at 90% 50%, rgba(150, 220, 255, 0.5) 2px, rgba(100, 200, 255, 0.1) 10px, transparent 12px),
+        radial-gradient(circle at 10% 70%, rgba(150, 220, 255, 0.5) 2px, rgba(100, 200, 255, 0.1) 10px, transparent 12px),
+        
+        /* Malla de conexiones */
+        repeating-linear-gradient(45deg, 
+            transparent, 
+            transparent 35px, 
+            rgba(130, 210, 255, 0.1) 35px, 
+            rgba(130, 210, 255, 0.1) 35.5px
+        ),
+        repeating-linear-gradient(-45deg, 
+            transparent, 
+            transparent 35px, 
+            rgba(130, 210, 255, 0.1) 35px, 
+            rgba(130, 210, 255, 0.1) 35.5px
+        ),
+        
+        /* Gradiente oscuro */
+        linear-gradient(135deg, #1a2634 0%, #1e3044 50%, #141e2a 100%);
+    
+    background-size: 
+        100% 100%,  /* neuronas */
+        100% 100%,  /* neuronas */
+        100% 100%,  /* neuronas */
+        100% 100%,  /* neuronas */
+        100% 100%,  /* neuronas */
+        100% 100%,  /* neuronas */
+        100% 100%,  /* neuronas */
+        100% 100%,  /* malla 45deg */
+        100% 100%,  /* malla -45deg */
+        100% 100%;  /* gradiente */
+    
+    min-height: 100vh;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+            
+
+
+            
+        
         [data-theme="dark"] .sidebar-contact-item:hover {
             background: linear-gradient(135deg, rgba(0,212,255,0.1) 0%, rgba(168,85,247,0.06) 100%);
             border-color: rgba(0,212,255,0.2);
@@ -409,7 +518,7 @@
         [data-theme="hacker"] .msg.outgoing, [data-theme="hacker"] .msg.manual { color: var(--msg-text-outgoing); }
         [data-theme="hacker"] .msg.ai-reply { color: var(--msg-text-ai); }
         [data-theme="hacker"] .msg.operator-ai { color: var(--msg-text-operator-ai); border-color: var(--msg-operator-ai-border); background: var(--msg-operator-ai-bg); }
-        [data-theme="hacker"] .msg.system { color: var(--msg-text-system); }
+        [data-theme="hacker"] .msg.system { color: var(--msg-system-color); }
         [data-theme="hacker"] .msg.error { color: var(--msg-text-error); }
         [data-theme="hacker"] .msg .meta .from { opacity: 0.9; }
         [data-theme="hacker"] body {
@@ -642,7 +751,22 @@
             background-image: 
                 radial-gradient(ellipse at 20% 50%, rgba(0, 210, 255, 0.03) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 20%, rgba(140, 82, 255, 0.03) 0%, transparent 50%);
+            position: relative;
         }
+
+        #msgNetworkCanvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.10;
+            transition: opacity 0.5s ease;
+        }
+        :root #msgNetworkCanvas { opacity: 0.10; }
+        [data-theme="dark"] #msgNetworkCanvas { opacity: 0.14; }
+        [data-theme="hacker"] #msgNetworkCanvas { opacity: 0.12; }
 
         .messages::-webkit-scrollbar {
             width: 4px;
@@ -656,11 +780,15 @@
             max-width: 72%;
             padding: 12px 18px;
             border-radius: 18px;
-            font-size: 14px;
-            line-height: 1.5;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14.5px;
+            font-weight: 520;
+            line-height: 1.65;
+            letter-spacing: 0.01em;
             word-break: break-word;
             animation: fade-in 0.2s ease;
             position: relative;
+            z-index: 1;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
@@ -692,27 +820,27 @@
             box-shadow: var(--msg-shadow-outgoing);
         }
 
-       .msg.ai-reply {
-    align-self: flex-start;
-    background: var(--msg-ai-bg);
-    backdrop-filter: blur(32px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom-left-radius: 4px;
-    color: var(--msg-text);
-    border: 1px solid var(--msg-ai-border);
-    box-shadow: var(--msg-shadow-ai);
-}
+        .msg.ai-reply {
+            align-self: flex-start;
+            background: var(--msg-ai-bg);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom-left-radius: 4px;
+            color: var(--msg-text);
+            border: 1px solid var(--msg-ai-border);
+            box-shadow: var(--msg-shadow-ai);
+        }
 
-      .msg.operator-ai {
-    align-self: flex-end;
-    background: var(--msg-operator-bg);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid var(--msg-ai-border);
-    border-bottom-right-radius: 4px;
-    color: var(--msg-text);
-    box-shadow: var(--msg-shadow-ai);
-}
+        .msg.operator-ai {
+            align-self: flex-end;
+            background: var(--msg-operator-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--msg-ai-border);
+            border-bottom-right-radius: 4px;
+            color: var(--msg-text);
+            box-shadow: var(--msg-shadow-ai);
+        }
 
         .msg.system {
             align-self: center;
@@ -737,16 +865,17 @@
         .msg .meta {
             display: flex;
             justify-content: space-between;
-            gap: 12px;
-            font-size: 10px;
+            gap: 14px;
+            font-size: 10.5px;
             color: var(--msg-meta-text);
-            margin-bottom: 4px;
+            margin-bottom: 5px;
+            letter-spacing: 0.02em;
         }
 
         .msg .meta .from {
-            font-weight: 600;
+            font-weight: 650;
             color: var(--msg-text);
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .msg .meta .time {
@@ -769,6 +898,8 @@
             text-align: center;
             gap: 8px;
             background-color: #41484a00;
+            position: relative;
+            z-index: 1;
         }
 
         .empty-chat i {
@@ -1777,6 +1908,7 @@
             transition: all 0.2s ease;
             border: 1px solid transparent;
             margin-bottom: 4px;
+            font-weight: 450;
         }
 
         .sidebar-contact-item:hover {
@@ -2367,11 +2499,8 @@
         }
         .qr-request-btn.visible { display: flex; }
 
-        /* === HAMBURGER MENU (mobile) === */
-        #openSidebar { display: none; }
-        @media (max-width: 1100px) {
-            #openSidebar { display: block; }
-        }
+        /* === HAMBURGER MENU === */
+        #openSidebar { display: block; }
     </style>
 </head>
 <body>
@@ -2406,8 +2535,9 @@
     <div class="main-area">
         
         <div class="chat-area">
-            <div class="messages" id="messagesBox">
-                <div class="empty-chat">
+        <div class="messages" id="messagesBox">
+            <canvas id="msgNetworkCanvas"></canvas>
+            <div class="empty-chat">
                     <i class="fas fa-comment-dots"></i>
                     <p>Selecciona un contacto para ver la conversación</p>
                 </div>
@@ -2538,6 +2668,11 @@
         </div>
         <div class="sidebar-tab-content" id="tab-config" style="display: none;">
             <div class="config-section">
+                <h4 style="margin-top:0; color:#00d4ff;"><i class="fas fa-tools"></i> Acciones</h4>
+                <button class="sidebar-action-btn" id="themeToggle"><i class="fas fa-palette"></i> Cambiar tema</button>
+                <button class="sidebar-action-btn" id="restartBtn"><i class="fas fa-sync-alt"></i> Reiniciar bot</button>
+                <button class="sidebar-action-btn" id="disconnectBtn"><i class="fas fa-plug"></i> Desconectar WhatsApp</button>
+                <button class="sidebar-action-btn danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
                 <h4><i class="fas fa-phone-slash"></i> Rechazo de llamadas</h4>
                 <div class="config-toggle-row">
                     <label>Activar rechazo automático</label>
@@ -2580,12 +2715,6 @@
                 <p style="font-size:11px; color:#7a8a9e; margin-bottom:10px;">Eliminará todas las conversaciones del historial. Los contactos se mantendrán.</p>
                 <button class="config-danger-btn" id="purgeConversationsBtn"><i class="fas fa-trash-alt"></i> Limpiar todas las conversaciones</button>
                 <div id="purgeSuccess" style="display: none;"></div>
-
-                <h4 style="margin-top:22px; color:#00d4ff;"><i class="fas fa-tools"></i> Acciones</h4>
-                <button class="sidebar-action-btn" id="themeToggle"><i class="fas fa-palette"></i> Cambiar tema</button>
-                <button class="sidebar-action-btn" id="restartBtn"><i class="fas fa-sync-alt"></i> Reiniciar bot</button>
-                <button class="sidebar-action-btn" id="disconnectBtn"><i class="fas fa-plug"></i> Desconectar WhatsApp</button>
-                <button class="sidebar-action-btn danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
             </div>
         </div>
     </div>
@@ -3673,6 +3802,175 @@
         }
 
         init();
+
+        // === MESSAGES NEURAL NETWORK ===
+        (function initMsgNetwork() {
+            const canvas = document.getElementById('msgNetworkCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            let particles = [];
+            let animId = null;
+            let mouseX = null;
+            let mouseY = null;
+            const COUNT = 80;
+            const DIST = 180;
+            const MOUSE_RADIUS = 200;
+
+            function getColors() {
+                const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+                if (theme === 'hacker') return { h: 45, hR: 20, s: 70, l: 65, lH: 50, lS: 80, lL: 70 };
+                if (theme === 'dark') return { h: 210, hR: 30, s: 70, l: 65, lH: 210, lS: 80, lL: 75 };
+                return { h: 215, hR: 25, s: 50, l: 55, lH: 215, lS: 60, lL: 65 };
+            }
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+            }
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.6;
+                    this.vy = (Math.random() - 0.5) * 0.6;
+                    this.radius = Math.random() * 2.5 + 1.5;
+                    this.baseRadius = this.radius;
+                    this.pulseSpeed = 0.01 + Math.random() * 0.02;
+                    this.pulseOffset = Math.random() * Math.PI * 2;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                    this.radius = this.baseRadius + Math.sin(Date.now() * this.pulseSpeed + this.pulseOffset) * 0.5;
+                }
+                draw(hue, hueR, sat, light) {
+                    const h = hue + Math.random() * hueR - hueR / 2;
+                    const r = this.radius;
+
+                    // Glow
+                    const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r * 4);
+                    grad.addColorStop(0, `hsla(${h},${sat}%,${light}%,0.8)`);
+                    grad.addColorStop(0.3, `hsla(${h},${sat}%,${light}%,0.35)`);
+                    grad.addColorStop(1, `hsla(${h},${sat}%,${light}%,0)`);
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, r * 4, 0, Math.PI * 2);
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+
+                    // Nucleo
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${h},90%,90%,0.85)`;
+                    ctx.fill();
+
+                    // Borde brillante
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, r * 0.8, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(255,100%,100%,0.5)`;
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < COUNT; i++) particles.push(new Particle());
+            }
+
+            function drawConnections(hue, sat, light) {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const a = particles[i], b = particles[j];
+                        const dx = a.x - b.x, dy = a.y - b.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < DIST) {
+                            const op = 1 - dist / DIST;
+                            const lw = 0.5 + op * 1.5;
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.strokeStyle = `hsla(${hue},${sat}%,${light}%,${op * 0.35})`;
+                            ctx.lineWidth = lw;
+                            ctx.stroke();
+
+                            if (op > 0.6) {
+                                ctx.beginPath();
+                                ctx.moveTo(a.x, a.y);
+                                ctx.lineTo(b.x, b.y);
+                                ctx.strokeStyle = `hsla(${hue + 15},${sat}%,${Math.min(light + 15, 90)}%,${op * 0.08})`;
+                                ctx.lineWidth = lw * 3;
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                const c = getColors();
+
+                particles.forEach(p => {
+                    // Mouse repulsion
+                    if (mouseX !== null && mouseY !== null) {
+                        const dx = p.x - mouseX;
+                        const dy = p.y - mouseY;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < MOUSE_RADIUS && dist > 0) {
+                            const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.5;
+                            p.x += (dx / dist) * force;
+                            p.y += (dy / dist) * force;
+                        }
+                    }
+                    p.update();
+                    p.draw(c.h, c.hR, c.s, c.l);
+                });
+
+                drawConnections(c.lH, c.lS, c.lL);
+                animId = requestAnimationFrame(animate);
+            }
+
+            // Mouse events
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+            });
+            canvas.addEventListener('mouseleave', () => { mouseX = null; mouseY = null; });
+            canvas.addEventListener('touchmove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                mouseX = touch.clientX - rect.left;
+                mouseY = touch.clientY - rect.top;
+            }, { passive: true });
+            canvas.addEventListener('touchend', () => { mouseX = null; mouseY = null; });
+
+            function start() {
+                stop();
+                resize();
+                initParticles();
+                animate();
+            }
+            function stop() {
+                if (animId) { cancelAnimationFrame(animId); animId = null; }
+                if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            start();
+            window.addEventListener('resize', () => { resize(); });
+
+            // Theme change handler
+            const origApply = applyTheme;
+            applyTheme = function(theme) {
+                origApply(theme);
+                setTimeout(start, 100);
+            };
+        })();
 
         console.log('N1 NEXUS VIP Panel iniciado');
     })();
